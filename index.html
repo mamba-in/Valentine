@@ -17,13 +17,15 @@
 
       .heart-container {
         position: relative;
-        width: 500px;
-        height: 500px;
+        width: 80vmin; /* 使心形容器的大小根据视窗宽度动态调整 */
+        height: 80vmin; /* 使心形容器的高度自适应 */
+        max-width: 500px; /* 最大宽度限制 */
+        max-height: 500px; /* 最大高度限制 */
       }
 
       .char {
         position: absolute;
-        font-size: 30px;
+        font-size: 4vmin; /* 文字大小根据视窗大小调整 */
         font-weight: bold;
         font-family: "Arial", sans-serif;
         color: #ff4d4d;
@@ -51,7 +53,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         text-align: center;
-        font-size: 24px;
+        font-size: 5vmin; /* 文字大小也按视窗动态调整 */
         font-family: "Arial", sans-serif;
         color: #ff3333;
         font-weight: bold;
@@ -72,6 +74,37 @@
         }
         100% {
           transform: translate(-50%, -50%) rotateY(0deg);
+        }
+      }
+
+      /* 响应式调整 */
+      @media (max-width: 768px) {
+        .heart-container {
+          width: 90vmin; /* 在较小屏幕上，占用更多宽度 */
+          height: 90vmin;
+        }
+
+        .char {
+          font-size: 5vmin; /* 文字在手机上变大一点 */
+        }
+
+        .center-text {
+          font-size: 6vmin; /* 中间文字稍微变大一点 */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .heart-container {
+          width: 95vmin; /* 在超小屏幕上，最大化占满 */
+          height: 95vmin;
+        }
+
+        .char {
+          font-size: 6vmin; /* 文字变更大 */
+        }
+
+        .center-text {
+          font-size: 7vmin; /* 中间文字变更大 */
         }
       }
     </style>
