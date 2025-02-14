@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>玫瑰心形</title>
+    <style>
+      body {
+        background-color: #ffe6e6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        margin: 0;
+      }
+
+      .heart-container {
+        position: relative;
+        width: 500px;
+        height: 500px;
+      }
+
+      .char {
+        position: absolute;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: "Arial", sans-serif;
+        color: #ff4d4d;
+        transform: translate(-50%, -50%);
+        animation: bounce 2s ease-in-out infinite;
+      }
+
+      /* 文字跳动动画 */
+      @keyframes bounce {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.2);
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+
+      /* 中间两行文字 */
+      .center-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        font-size: 24px;
+        font-family: "Arial", sans-serif;
+        color: #ff3333;
+        font-weight: bold;
+        animation: flipText 4s infinite linear; /* 文字左右翻转动画 */
+      }
+
+      .center-text span {
+        display: block;
+      }
+
+      /* 文字左右翻转动画 */
+      @keyframes flipText {
+        0% {
+          transform: translate(-50%, -50%) rotateY(0deg);
+        }
+        50% {
+          transform: translate(-50%, -50%) rotateY(180deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotateY(0deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="heart-container" id="heartContainer">
+      <!-- 中间的两行文字 -->
+      <div class="center-text">
+        <span>宁可</span>
+        <span>情人节快乐</span>
+      </div>
+    </div>
+
+    <script>
+      function drawHeart() {
+        const container = document.getElementById("heartContainer");
+        const text = "🌹"; // 使用玫瑰花表情代替“宁可”
+        let points = 80; // 文字点的数量
+
+        // 调整每个文字的位置，确保它们有足够的间隙
+        let distance = 18; // 字符之间的间距
+
+        for (let i = 0; i < points; i++) {
+          let t = (i / points) * Math.PI * 2; // 计算角度
+          let x = 16 * Math.pow(Math.sin(t), 3);
+          let y =
+            13 * Math.cos(t) -
+            5 * Math.cos(2 * t) -
+            2 * Math.cos(3 * t) -
+            Math.cos(4 * t);
+
+          // 适配到网页坐标，扩大比例让间隙大一些
+          let left = x * distance + 250; // 放大并移动到容器中心
+          let top = -y * distance + 250;
+
+          let span = document.createElement("span");
+          span.className = "char";
+          span.innerText = text; // 每个位置都使用“🌹”
+          span.style.left = left + "px";
+          span.style.top = top + "px";
+
+          container.appendChild(span);
+        }
+      }
+
+      drawHeart();
+    </script>
+  </body>
+</html>
